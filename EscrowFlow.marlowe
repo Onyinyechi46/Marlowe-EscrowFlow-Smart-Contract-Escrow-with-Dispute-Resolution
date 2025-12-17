@@ -1,0 +1,95 @@
+When
+    [Case
+        (Deposit
+            (Role "Seller")
+            (Role "Buyer")
+            (Token "" "")
+            (ConstantParam "Price")
+        )
+        (When
+            [Case
+                (Choice
+                    (ChoiceId
+                        "Accept delivery"
+                        (Role "Buyer")
+                    )
+                    [Bound 1 1]
+                )
+                (Pay
+                    (Role "Seller")
+                    (Party (Role "Buyer"))
+                    (Token "" "")
+                    (ConstantParam "Price")
+                    Close 
+                ), Case
+                (Choice
+                    (ChoiceId
+                        "Report issue"
+                        (Role "Buyer")
+                    )
+                    [Bound 0 0]
+                )
+                (When
+                    [Case
+                        (Choice
+                            (ChoiceId
+                                "Refund buyer"
+                                (Role "Seller")
+                            )
+                            [Bound 1 1]
+                        )
+                        (Pay
+                            (Role "Buyer")
+                            (Account (Role "Seller"))
+                            (Token "" "")
+                            (ConstantParam "Price")
+                            Close 
+                        ), Case
+                        (Choice
+                            (ChoiceId
+                                "Escalate"
+                                (Role "Seller")
+                            )
+                            [Bound 0 0]
+                        )
+                        (When
+                            [Case
+                                (Choice
+                                    (ChoiceId
+                                        "Award buyer"
+                                        (Role "Arbiter")
+                                    )
+                                    [Bound 1 1]
+                                )
+                                (Pay
+                                    (Role "Buyer")
+                                    (Account (Role "Seller"))
+                                    (Token "" "")
+                                    (ConstantParam "Price")
+                                    Close 
+                                ), Case
+                                (Choice
+                                    (ChoiceId
+                                        "Award seller"
+                                        (Role "Arbiter")
+                                    )
+                                    [Bound 0 0]
+                                )
+                                (Pay
+                                    (Role "Seller")
+                                    (Party (Role "Buyer"))
+                                    (Token "" "")
+                                    (ConstantParam "Price")
+                                    Close 
+                                )]
+                            (TimeParam "Arbitration deadline")
+                            Close 
+                        )]
+                    (TimeParam "Seller response deadline")
+                    Close 
+                )]
+            (TimeParam "Buyer complaint deadline")
+            Close 
+        )]
+    (TimeParam "Payment deadline")
+    Close 
