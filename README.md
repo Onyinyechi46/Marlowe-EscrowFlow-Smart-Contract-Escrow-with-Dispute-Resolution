@@ -16,28 +16,28 @@
 - 🔍 **Transparent Logic** - Verifiable on-chain execution with clear decision paths
 - 🌐 **Permissionless Access** - No geographical restrictions or intermediary approvals
 
-┌─────────────────────────────────────────────────────────┐
-│                   STATE TRANSITIONS                      │
-├─────────────────────────────────────────────────────────┤
-│                                                         │
-│  🟡 WAITING FOR DEPOSIT                                 │
-│      ├─→ 🔵 DEPOSITED (Buyer deposits)                  │
-│      └─→ ⚫ CLOSED (Timeout)                            │
-│                                                         │
-│  🔵 DEPOSITED                                           │
-│      ├─→ 🟣 INSPECTING (Buyer inspects)                │
-│      └─→ ⚫ CLOSED (Timeout)                            │
-│                                                         │
-│  🟣 INSPECTING                                          │
-│      ├─→ 🟢 FINALIZED - Seller paid (Accept)            │
-│      └─→ 🔴 DISPUTE PHASE (Report problem)              │
-│                                                         │
-│  🔴 DISPUTE PHASE                                       │
-│      ├─→ 🟢 FINALIZED - Buyer refunded (Seller confirms)│
-│      └─→ 🔵 MEDIATION (Seller disputes)                 │
-│                                                         │
-│  🔵 MEDIATION                                           │
-│      ├─→ 🟢 FINALIZED - Buyer refunded (Mediator confirms)│
-│      └─→ 🟢 FINALIZED - Seller paid (Mediator dismisses)│
-│                                                         │
-└─────────────────────────────────────────────────────────┘
+```text
+┌───────────────────────────────┐
+│ STATE TRANSITIONS │
+├───────────────────────────────┤
+│ 🟡 WAITING FOR DEPOSIT │
+│ ├─→ 🔵 DEPOSITED (Buyer deposits) │
+│ └─→ ⚫ CLOSED (Timeout) │
+│ │
+│ 🔵 DEPOSITED │
+│ ├─→ 🟣 INSPECTING (Buyer inspects) │
+│ └─→ ⚫ CLOSED (Timeout) │
+│ │
+│ 🟣 INSPECTING │
+│ ├─→ 🟢 FINALIZED - Seller paid (Accept) │
+│ └─→ 🔴 DISPUTE PHASE (Report problem) │
+│ │
+│ 🔴 DISPUTE PHASE │
+│ ├─→ 🟢 FINALIZED - Buyer refunded (Seller confirms) │
+│ └─→ 🔵 MEDIATION (Seller disputes) │
+│ │
+│ 🔵 MEDIATION │
+│ ├─→ 🟢 FINALIZED - Buyer refunded (Mediator confirms) │
+│ └─→ 🟢 FINALIZED - Seller paid (Mediator dismisses) │
+└───────────────────────────────┘
+```
